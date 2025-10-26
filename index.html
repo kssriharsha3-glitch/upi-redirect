@@ -3,47 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UPI Redirect Generator</title>
-<style>
-    body { font-family: Arial; text-align:center; padding:50px; background:#f9f9f9; }
-    input, button { padding:10px; margin:10px 0; width:250px; font-size:16px; }
-    button { cursor:pointer; background:#4CAF50; color:white; border:none; border-radius:5px; }
-    button:hover { background:#45a049; }
-    #redirectLink { display:block; margin-top:20px; word-break:break-all; font-weight:bold; }
-</style>
-</head>
-<body>
-<h1>UPI Redirect Link Generator</h1>
-
-<input type="text" id="upiId" placeholder="Enter UPI ID (example@bank)">
-<br>
-<input type="number" id="amount" placeholder="Enter Amount (optional)">
-<br>
-<button onclick="generateRedirect()">Generate HTTPS Link</button>
-
-<p>Generated Link:</p>
-<a id="redirectLink" href="#" target="_blank">-</a>
-
+<title>UPI Redirect</title>
 <script>
-function generateRedirect() {
-    var upiId = document.getElementById('upiId').value.trim();
-    var amount = document.getElementById('amount').value.trim();
-    if (!upiId) { alert("Enter a UPI ID"); return; }
+function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
 
-    // Encode the UPI link
-    var upiLink = "upi://pay?pa=" + encodeURIComponent(upiId) + "&pn=YourName";
-    if(amount) upiLink += "&am=" + encodeURIComponent(amount);
+window.onload = function() {
+    const upiId = getQueryParam('upi');
+    const amount = getQueryParam('amount');
+    const name = getQueryParam('name') || 'Payee';
+
+    if(!upiId) {
+        document.body.innerHTML = "<p>UPI ID missing in URL!</p>";
+        return;
+    }
+
+    let upiLink = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(name)}`;
+    if(amount) upiLink += `&am=${encodeURIComponent(amount)}`;
     upiLink += "&cu=INR";
 
-    // Generate a small redirect page as a data URL
-    var html = `<html><head><meta http-equiv="refresh" content="0; url=${upiLink}"></head><body>If not redirected, <a href="${upiLink}">click here</a>.</body></html>`;
-    var blob = new Blob([html], {type: 'text/html'});
-    var url = URL.createObjectURL(blob);
-
-    var linkElem = document.getElementById('redirectLink');
-    linkElem.href = url;
-    linkElem.textContent = url;
-}
+    // redirect
+    window.location.href = upiLink;
+};
 </script>
+</head>
+<body>
+<p>Redirecting to UPI...</p>
+<p>If not redirected, <span id="link"><a href="#">click here</a></span></p>
 </body>
 </html>
