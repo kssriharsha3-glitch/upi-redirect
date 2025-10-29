@@ -1,36 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UPI Redirect</title>
-<script>
-function getQueryParam(param) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(param);
-}
-
-window.onload = function() {
-    const upiId = getQueryParam('upi');
-    const amount = getQueryParam('amount');
-    const name = getQueryParam('name') || 'Payee';
-
-    if(!upiId) {
-        document.body.innerHTML = "<p>UPI ID missing in URL!</p>";
-        return;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BODS Dues Phase 2 - UPI Payment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9fafb;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      color: #222;
     }
-
-    let upiLink = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(name)}`;
-    if(amount) upiLink += `&am=${encodeURIComponent(amount)}`;
-    upiLink += "&cu=INR";
-
-    // redirect
-    window.location.href = upiLink;
-};
-</script>
+    .container {
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 320px;
+    }
+    img {
+      margin: 16px 0;
+      border-radius: 8px;
+    }
+    button {
+      background-color: #0078ff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 24px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+    button:hover {
+      background-color: #005fcc;
+    }
+    .note {
+      font-size: 14px;
+      color: #666;
+      margin-top: 12px;
+    }
+  </style>
 </head>
 <body>
-<p>Redirecting to UPI...</p>
-<p>If not redirected, <span id="link"><a href="#">click here</a></span></p>
+  <div class="container">
+    <h2>BODS Dues Phase 2</h2>
+    <p>UPI ID: <strong>pranav.yoga@oksbi</strong></p>
+
+    <!-- QR Code -->
+    <img 
+      src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=pranav.yoga@oksbi&pn=Pranav&cu=INR&tn=BODS%20dues%20phase%202" 
+      alt="UPI QR Code">
+
+    <!-- Pay Button -->
+    <button onclick="window.location.href='upi://pay?pa=pranav.yoga@oksbi&pn=Pranav&cu=INR&tn=BODS%20dues%20phase%202'">
+      Pay Now
+    </button>
+
+    <p class="note">Scan the QR or tap 'Pay Now' to complete your payment.</p>
+  </div>
 </body>
 </html>
