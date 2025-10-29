@@ -5,110 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rotaract Club of SSMRV</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
-
     body {
-      font-family: 'Poppins', Arial, sans-serif;
+      font-family: "Poppins", sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #0077b6, #00b4d8);
+      color: white;
+      height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
       margin: 0;
-      background: linear-gradient(135deg, #1976d2, #64b5f6);
-      overflow: hidden;
     }
-
-    .container {
-      background-color: white;
-      padding: 30px 25px;
-      border-radius: 20px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-      text-align: center;
-      width: 90%;
-      max-width: 400px;
-      opacity: 0;
-      transform: translateY(40px);
-      animation: fadeInUp 0.8s ease-out forwards;
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
     h1 {
-      color: #1976d2;
-      font-size: 22px;
-      margin-bottom: 10px;
-      animation: fadeIn 1s ease forwards;
+      font-size: 1.8rem;
+      margin-bottom: 25px;
     }
-
-    p {
-      color: #555;
-      font-size: 15px;
-      margin-bottom: 20px;
-      animation: fadeIn 1s ease forwards;
+    a {
+      text-decoration: none;
     }
-
-    .btn {
+    .button {
       display: block;
-      width: 100%;
-      padding: 12px;
+      background: white;
+      color: #0077b6;
+      padding: 15px 25px;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 1rem;
       margin: 10px 0;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: 500;
-      cursor: pointer;
-      color: white;
-      transition: transform 0.15s ease, opacity 0.15s ease;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: slideUp 0.8s ease forwards;
+      width: 250px;
+      transition: transform 0.2s, background 0.3s;
     }
-
-    .btn:nth-child(3) { animation-delay: 0.3s; }
-    .btn:nth-child(4) { animation-delay: 0.5s; }
-    .btn:nth-child(5) { animation-delay: 0.7s; }
-
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .btn:hover {
+    .button:hover {
+      background: #caf0f8;
       transform: scale(1.05);
-      opacity: 0.9;
-    }
-
-    .bods { background-color: #1a73e8; }
-    .mentors { background-color: #43a047; }
-    .exclusive { background-color: #8e24aa; }
-
-    footer {
-      font-size: 13px;
-      color: #666;
-      margin-top: 15px;
-      animation: fadeIn 1s ease forwards;
-      animation-delay: 1s;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Rotaract Club of SSMRV</h1>
-    <p>Select your category to proceed with payment</p>
+  <h1>Rotaract Club of SSMRV</h1>
 
-    <a href="bods-dues.html"><button class="btn bods">BODS Dues Phase 2 – ₹600</button></a>
-    <a href="mentors-chairs.html"><button class="btn mentors">Mentors & Chairs – ₹500</button></a>
-    <a href="exclusive-members.html"><button class="btn exclusive">Exclusive Members – ₹650</button></a>
-
-    <footer>Powered by UPI · Rotaract Club of SSMRV</footer>
-  </div>
+  <a href="bods-dues.html"><div class="button">BODS Dues (₹600)</div></a>
+  <a href="mentors-chairs.html"><div class="button">Mentors & Chairs (₹500)</div></a>
+  <a href="exclusive-members.html"><div class="button">Exclusive Members (₹650)</div></a>
 </body>
 </html>
